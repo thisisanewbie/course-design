@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.piaoduoduo.mapper.MovieDao">
+  <resultMap id="BaseResultMap" type="com.example.piaoduoduo.model.Movie">
+    <id column="key" jdbcType="INTEGER" property="key" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="ori_price" jdbcType="VARCHAR" property="oriprice" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `key`, price, ori_price, thumb, title, tag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie
+    where `key` = #{key,jdbcType=INTEGER}
+  </select>
+  <select id="selectMovie" resultType="com.example.piaoduoduo.model.Movie">
+    select * from movie
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from movie
+    where `key` = #{key,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="key" keyProperty="key" parameterType="com.example.piaoduoduo.model.Movie" useGeneratedKeys="true">
+    insert into movie (price, ori_price, thumb, 
+      title, tag)
+    values (#{price,jdbcType=VARCHAR}, #{oriPrice,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="key" keyProperty="key" parameterType="com.example.piaoduoduo.model.Movie" useGeneratedKeys="true">
+    insert into movie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="price != null">
+        price,
+      </if>
+      <if test="oriPrice != null">
+        ori_price,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="oriPrice != null">
+        #{oriPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.piaoduoduo.model.Movie">
+    update movie
+    <set>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="oriPrice != null">
+        ori_price = #{oriPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `key` = #{key,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.piaoduoduo.model.Movie">
+    update movie
+    set price = #{price,jdbcType=VARCHAR},
+      ori_price = #{oriPrice,jdbcType=VARCHAR},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR}
+    where `key` = #{key,jdbcType=INTEGER}
+  </update>
+</mapper>

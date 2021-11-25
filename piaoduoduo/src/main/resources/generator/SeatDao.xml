@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.piaoduoduo.mapper.SeatDao">
+  <resultMap id="BaseResultMap" type="com.example.piaoduoduo.model.Seat">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="moviekey" jdbcType="INTEGER" property="moviekey" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `state`, moviekey
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByMovieKey" parameterType="integer" resultType="com.example.piaoduoduo.model.Seat">
+    select state ,id from seat where moviekey = #{moviekey,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from seat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.piaoduoduo.model.Seat" useGeneratedKeys="true">
+    insert into seat (`state`, moviekey)
+    values (#{state,jdbcType=INTEGER}, #{moviekey,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.piaoduoduo.model.Seat" useGeneratedKeys="true">
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="moviekey != null">
+        moviekey,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="moviekey != null">
+        #{moviekey,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.piaoduoduo.model.Seat">
+    update seat
+    <set>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="moviekey != null">
+        moviekey = #{moviekey,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.piaoduoduo.model.Seat">
+    update seat
+    set `state` = #{state,jdbcType=INTEGER},
+      moviekey = #{moviekey,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="integer">
+    update seat set state=2 where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

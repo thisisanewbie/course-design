@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.piaoduoduo.mapper.OrderDao">
+  <resultMap id="BaseResultMap" type="com.example.piaoduoduo.model.Order">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="key" jdbcType="INTEGER" property="key" />
+    <result column="i" jdbcType="VARCHAR" property="i" />
+    <result column="j" jdbcType="VARCHAR" property="j" />
+  </resultMap>
+  <select id="orderlist" parameterType="integer" resultType="com.example.piaoduoduo.model.OrderList">
+    select movie.`key`,thumb,title,`desc`,i,j from movie,`order` where movie.key=`order`.key and `order`.id=#{id}
+  </select>
+  <insert id="insert" parameterType="com.example.piaoduoduo.model.Order">
+    insert into `order` (id, `key`, i, j
+      )
+    values (#{id,jdbcType=INTEGER}, #{key,jdbcType=INTEGER}, #{i,jdbcType=VARCHAR}, #{j,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.piaoduoduo.model.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="i != null">
+        i,
+      </if>
+      <if test="j != null">
+        j,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=INTEGER},
+      </if>
+      <if test="i != null">
+        #{i,jdbcType=VARCHAR},
+      </if>
+      <if test="j != null">
+        #{j,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
