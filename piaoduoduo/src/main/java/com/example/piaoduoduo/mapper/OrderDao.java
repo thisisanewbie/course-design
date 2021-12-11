@@ -14,4 +14,6 @@ public interface OrderDao {
     int insertSelective(Order record);
 
     List<OrderList> orderlist(@Param("id") Integer id);
+
+    void cancel(@Param("id") Integer id,@Param("key") Integer key,@Param("mid") Integer mid);
 }

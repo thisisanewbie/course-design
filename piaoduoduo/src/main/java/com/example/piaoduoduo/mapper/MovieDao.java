@@ -2,6 +2,7 @@ package com.example.piaoduoduo.mapper;
 
 import com.example.piaoduoduo.model.Movie;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface MovieDao {
 
     int insertSelective(Movie record);
 
-    Movie selectByPrimaryKey(Integer key);
+    int selectByPrimaryKey(@Param("key") Integer key);
 
     int updateByPrimaryKeySelective(Movie record);
 

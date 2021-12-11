@@ -8,12 +8,16 @@
     <result column="j" jdbcType="VARCHAR" property="j" />
   </resultMap>
   <select id="orderlist" parameterType="integer" resultType="com.example.piaoduoduo.model.OrderList">
-    select movie.`key`,thumb,title,`desc`,i,j from movie,`order` where movie.key=`order`.key and `order`.id=#{id}
+    select movie.`key`,thumb,title,`desc`,i,j ,mid from movie,`order` where movie.key=`order`.key and `order`.id=#{id}
   </select>
+  <delete id="cancel">
+    delete from `order` where `key`=#{key} and `id`=#{id} and mid=#{mid}
+  </delete>
   <insert id="insert" parameterType="com.example.piaoduoduo.model.Order">
-    insert into `order` (id, `key`, i, j
+    insert into `order` (id, `key`, i, j,mid
       )
-    values (#{id,jdbcType=INTEGER}, #{key,jdbcType=INTEGER}, #{i,jdbcType=VARCHAR}, #{j,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{key,jdbcType=INTEGER}, #{i,jdbcType=VARCHAR}, #{j,jdbcType=VARCHAR},
+            #{mid,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.piaoduoduo.model.Order">

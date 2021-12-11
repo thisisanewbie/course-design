@@ -9,7 +9,9 @@ import lombok.Data;
  */
 @Data
 public class Order implements Serializable {
-    private Integer id;
+    private Integer mid;
+
+    private Integer id;//user's id
 
     private Integer key;
 

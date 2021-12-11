@@ -2,6 +2,7 @@ package com.example.piaoduoduo.mapper;
 
 import com.example.piaoduoduo.model.Seat;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface SeatDao {
     int updateByPrimaryKey(Seat record);
 
     int update(Integer id);
+
+    void canceled(@Param("id") Integer id);
 
     List<Seat> selectByMovieKey(Integer moviekey);
 }

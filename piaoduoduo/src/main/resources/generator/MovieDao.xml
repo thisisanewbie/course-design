@@ -12,9 +12,9 @@
   <sql id="Base_Column_List">
     `key`, price, ori_price, thumb, title, tag
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     select 
-    <include refid="Base_Column_List" />
+    price
     from movie
     where `key` = #{key,jdbcType=INTEGER}
   </select>

@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class OrderList {
+    private Integer mid;
+
     private Integer key;
 
     private String thumb;

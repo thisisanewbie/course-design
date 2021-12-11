@@ -66,4 +66,7 @@
   <update id="update" parameterType="integer">
     update seat set state=2 where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="canceled" parameterType="integer">
+    update seat set state=0 where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
